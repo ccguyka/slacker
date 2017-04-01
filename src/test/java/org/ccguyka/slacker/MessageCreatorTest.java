@@ -1,13 +1,13 @@
 package org.ccguyka.slacker;
 
 
-import org.junit.Test;
-
 import static org.assertj.core.api.Assertions.assertThat;
+
+import org.junit.Test;
 
 public class MessageCreatorTest {
 
-    private MessageCreator messageCreator = new MessageCreator();
+    private final MessageCreator messageCreator = new MessageCreator();
 
     @Test
     public void verifyNoMessageIsCreatedIfMandatoryParameterAreMissing() {
@@ -18,42 +18,46 @@ public class MessageCreatorTest {
 
     @Test
     public void verifyNoMessageIsCreatedIfHelpParameterIsAvailable() {
-        Message message = messageCreator.from(new String[] {"-h" , "-hk",  "foo", "-m" , "message"});
+        Message message = messageCreator.from(new String[]{"-h", "-hk", "foo", "-m", "message"});
 
         assertThat(message).isNull();
     }
 
     @Test
     public void verifyMinimalMessageIsCreated() {
-        Message message = messageCreator.from(new String[] {"-hk",  "hook", "-m" , "message"});
+        Message message = messageCreator.from(new String[]{"-hk", "hook", "-m", "message"});
 
         assertThat(message).isEqualTo(new Message("hook", "message"));
     }
 
     @Test
     public void verifyTitleIsSet() {
-        Message message = messageCreator.from(new String[] {"-hk",  "hook", "-m" , "message", "-t", "title"});
+        Message message = messageCreator
+            .from(new String[]{"-hk", "hook", "-m", "message", "-t", "title"});
 
         assertThat(message.getTitle()).isEqualTo("title");
     }
 
     @Test
     public void verifyTitleLinkIsSet() {
-        Message message = messageCreator.from(new String[] {"-hk",  "hook", "-m" , "message", "-tl", "titlelink"});
+        Message message = messageCreator
+            .from(new String[]{"-hk", "hook", "-m", "message", "-tl", "titlelink"});
 
         assertThat(message.getTitleLink()).isEqualTo("titlelink");
     }
 
     @Test
     public void verifyAuthorIsSet() {
-        Message message = messageCreator.from(new String[] {"-hk",  "hook", "-m" , "message", "-a", "author"});
+        Message message = messageCreator
+            .from(new String[]{"-hk", "hook", "-m", "message", "-a", "author"});
 
         assertThat(message.getAuthor()).isEqualTo("author");
     }
 
     @Test
     public void verifyColorIsSet() {
-        Message message = messageCreator.from(new String[] {"-hk",  "hook", "-m" , "message", "-c", "green"});
+        Message message = messageCreator
+            .from(new String[]{"-hk", "hook", "-m", "message", "-c", "green"});
 
         assertThat(message.getColor()).isEqualTo("green");
     }

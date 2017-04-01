@@ -1,13 +1,18 @@
 package org.ccguyka.slacker;
 
 
+import static com.github.tomakehurst.wiremock.client.WireMock.aResponse;
+import static com.github.tomakehurst.wiremock.client.WireMock.post;
+import static com.github.tomakehurst.wiremock.client.WireMock.postRequestedFor;
+import static com.github.tomakehurst.wiremock.client.WireMock.stubFor;
+import static com.github.tomakehurst.wiremock.client.WireMock.urlEqualTo;
+import static com.github.tomakehurst.wiremock.client.WireMock.verify;
+import static com.github.tomakehurst.wiremock.core.WireMockConfiguration.options;
+
 import com.github.tomakehurst.wiremock.junit.WireMockRule;
 import com.github.tomakehurst.wiremock.matching.ContainsPattern;
 import org.junit.Rule;
 import org.junit.Test;
-
-import static com.github.tomakehurst.wiremock.client.WireMock.*;
-import static com.github.tomakehurst.wiremock.core.WireMockConfiguration.options;
 
 public class SlackerTest {
 
@@ -54,7 +59,7 @@ public class SlackerTest {
     }
 
     @Test
-    public void verifyMessageIsNotSentIfHelpParemeterIsSpecified() throws Exception {
+    public void verifyMessageIsNotSentIfHelpParameterIsSpecified() throws Exception {
         stubFor(post(urlEqualTo("/webhook"))
                 .willReturn(aResponse()
                         .withBody("ok!")));

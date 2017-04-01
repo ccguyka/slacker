@@ -5,7 +5,7 @@ import net.gpedro.integrations.slack.SlackAttachment;
 import net.gpedro.integrations.slack.SlackMessage;
 
 
-public class Slacker {
+class Slacker {
 
     private final Message message;
 

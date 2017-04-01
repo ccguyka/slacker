@@ -1,11 +1,11 @@
 package org.ccguyka.slacker;
 
 
-import nl.jqno.equalsverifier.EqualsVerifier;
-import org.junit.Test;
-
 import static nl.jqno.equalsverifier.Warning.NONFINAL_FIELDS;
 import static org.assertj.core.api.Assertions.assertThat;
+
+import nl.jqno.equalsverifier.EqualsVerifier;
+import org.junit.Test;
 
 public class MessageTest {
 
