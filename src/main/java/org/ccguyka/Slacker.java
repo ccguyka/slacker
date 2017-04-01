@@ -8,21 +8,10 @@ import org.apache.commons.cli.*;
 
 public class Slacker {
 
-    private final Options options;
     private final Message message;
 
     public Slacker(Message message) {
         this.message = message;
-
-        options = new Options();
-
-        options.addRequiredOption("hk", "hook", true, "Slack to hook");
-        options.addRequiredOption("m", "message", true, "Message to be sent");
-        options.addOption("a", "author", true, "Author of the message");
-        options.addOption("c", "color", true, "Color of the message, default: 'warning'");
-        options.addOption("t", "title", true, "Title of the message");
-        options.addOption("tl", "titlelink", true, "The link where title should refer to");
-        options.addOption("h", "help", false, "print this message");
     }
 
     public static void main(String[] args) throws Exception {
