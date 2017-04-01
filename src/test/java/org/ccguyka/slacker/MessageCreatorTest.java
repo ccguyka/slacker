@@ -1,4 +1,4 @@
-package org.ccguyka;
+package org.ccguyka.slacker;
 
 
 import org.junit.Test;

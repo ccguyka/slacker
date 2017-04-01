@@ -1,4 +1,4 @@
-package org.ccguyka;
+package org.ccguyka.slacker;
 
 import net.gpedro.integrations.slack.SlackApi;
 import net.gpedro.integrations.slack.SlackAttachment;
