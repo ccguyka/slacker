@@ -9,8 +9,11 @@ import org.apache.commons.cli.*;
 public class Slacker {
 
     private final Options options;
+    private final Message message;
 
-    public Slacker() {
+    public Slacker(Message message) {
+        this.message = message;
+
         options = new Options();
 
         options.addRequiredOption("hk", "hook", true, "Slack to hook");
@@ -23,42 +26,19 @@ public class Slacker {
     }
 
     public static void main(String[] args) throws Exception {
-        Slacker slacker = new Slacker();
-        slacker.send(args);
+        MessageCreator messageCreator = new MessageCreator();
+        Message message = messageCreator.from(args);
+        if (message == null) {
+            messageCreator.printHelp();
+            return;
+        }
+        Slacker slacker = new Slacker(message);
+        slacker.send();
     }
 
-    private void send(String[] args) throws ParseException {
-        CommandLineParser parser = new DefaultParser();
-        CommandLine cmd;
-        try {
-            cmd = parser.parse(options, args);
-        } catch( ParseException exp ) {
-            printHelp();
-
-            return;
-        }
-
-        if (cmd.hasOption("help")) {
-            // automatically generate the help statement
-            printHelp();
-            return;
-        }
-
-        Message message = createMessage(cmd);
-
+    private void send() throws ParseException {
         SlackApi api = new SlackApi(message.getDestination());
         api.call(createSlackMessageFor(message));
-    }
-
-    private Message createMessage(CommandLine cmd) {
-        String messageText = cmd.getOptionValue("message");
-        String destination = cmd.getOptionValue("hook");
-        Message message = new Message(destination, messageText);
-        message.setColor(cmd.getOptionValue("color", "warning"));
-        message.setAuthor(cmd.getOptionValue("author", null));
-        message.setTitle(cmd.getOptionValue("title", null));
-        message.setTitleLink(cmd.getOptionValue("titlelink", null));
-        return message;
     }
 
     private SlackMessage createSlackMessageFor(Message message) {
@@ -77,11 +57,5 @@ public class Slacker {
         attachment.setTitle(message.getTitle());
         attachment.setTitleLink(message.getTitleLink());
         return attachment;
-    }
-
-    private void printHelp() {
-        // automatically generate the help statement
-        HelpFormatter formatter = new HelpFormatter();
-        formatter.printHelp( "java -jar slacker.jar", options );
     }
 }
