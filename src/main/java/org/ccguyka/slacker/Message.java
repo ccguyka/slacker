@@ -1,7 +1,6 @@
 package org.ccguyka.slacker;
 
 
-import com.google.common.base.MoreObjects;
 import com.google.common.base.Objects;
 
 public class Message {
@@ -78,17 +77,5 @@ public class Message {
     @Override
     public int hashCode() {
         return Objects.hashCode(destination, messageText, color, author, title, titleLink);
-    }
-
-    @Override
-    public String toString() {
-        return MoreObjects.toStringHelper(this)
-                .add("destination", destination)
-                .add("messageText", messageText)
-                .add("color", color)
-                .add("author", author)
-                .add("title", title)
-                .add("titleLink", titleLink)
-                .toString();
     }
 }
