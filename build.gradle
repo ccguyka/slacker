@@ -12,6 +12,11 @@ apply plugin: 'idea'
 
 // Apply the application plugin to add support for building an application
 apply plugin: 'application'
+apply plugin: 'maven-publish'
+
+version = '1.0.0-SNAPSHOT'
+group = 'org.ccguyka'
+
 
 buildscript {
     repositories {
@@ -47,6 +52,26 @@ dependencies {
     testCompile 'org.assertj:assertj-core:3.6.2'
     testCompile 'nl.jqno.equalsverifier:equalsverifier:2.2.1'
     testCompile "com.github.tomakehurst:wiremock:2.5.1"
+}
+
+task sourcesJar(type: Jar, dependsOn: classes) {
+    classifier = 'sources'
+    from sourceSets.main.allSource
+}
+
+task javadocJar(type: Jar, dependsOn: javadoc) {
+    classifier = 'javadoc'
+    from javadoc.destinationDir
+}
+
+publishing {
+    publications {
+        mavenJava(MavenPublication) {
+            from components.java
+            artifact sourcesJar
+            artifact javadocJar
+        }
+    }
 }
 
 cobertura.coverageFormats = ['html', 'xml']
