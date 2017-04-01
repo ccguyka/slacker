@@ -1,11 +1,14 @@
 package org.ccguyka;
 
 
+import com.google.common.base.MoreObjects;
+import com.google.common.base.Objects;
+
 public class Message {
 
     private final String destination;
     private final String messageText;
-    private String color;
+    private String color = "warning";
     private String author;
     private String title;
     private String titleLink;
@@ -53,5 +56,35 @@ public class Message {
 
     public String getTitleLink() {
         return titleLink;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Message message = (Message) o;
+        return Objects.equal(destination, message.destination) &&
+                Objects.equal(messageText, message.messageText) &&
+                Objects.equal(color, message.color) &&
+                Objects.equal(author, message.author) &&
+                Objects.equal(title, message.title) &&
+                Objects.equal(titleLink, message.titleLink);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hashCode(destination, messageText, color, author, title, titleLink);
+    }
+
+    @Override
+    public String toString() {
+        return MoreObjects.toStringHelper(this)
+                .add("destination", destination)
+                .add("messageText", messageText)
+                .add("color", color)
+                .add("author", author)
+                .add("title", title)
+                .add("titleLink", titleLink)
+                .toString();
     }
 }
