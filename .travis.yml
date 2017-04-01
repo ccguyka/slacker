@@ -15,4 +15,4 @@ before_install:
   - gradle wrapper
 
 after_success:
-  - ./gradlew cobertura coveralls
+  - ./gradlew jacocoTestReport coveralls

@@ -29,13 +29,12 @@ buildscript {
     }
 
     dependencies {
-        classpath 'net.saliman:gradle-cobertura-plugin:2.4.0'
         classpath 'org.kt3k.gradle.plugin:coveralls-gradle-plugin:2.8.1'
         classpath "org.sonarsource.scanner.gradle:sonarqube-gradle-plugin:2.3"
     }
 }
 
-apply plugin: 'cobertura'
+apply plugin: 'jacoco'
 apply plugin: 'com.github.kt3k.coveralls'
 
 sourceCompatibility = 1.8
@@ -83,11 +82,8 @@ sonarqube {
     properties {
         property "sonar.projectName", "slacker"
         property "sonar.projectKey", "${group}:slacker"
-        property "sonar.jacoco.reportPath", "${project.buildDir}/jacoco/test.exec"
     }
 }
-
-cobertura.coverageFormats = ['html', 'xml']
 
 // Define the main class for the application
 mainClassName = 'Slacker'
