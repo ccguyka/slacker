@@ -54,3 +54,7 @@ cobertura.coverageFormats = ['html', 'xml']
 // Define the main class for the application
 mainClassName = 'Slacker'
 
+task wrapper(type: Wrapper) {
+    gradleVersion = '3.4.1' //version required
+}
+
