@@ -11,5 +11,8 @@ cache:
     - $HOME/.gradle/caches/
     - $HOME/.gradle/wrapper/
 
+before_script:
+  - gradle wrapper
+
 after_success:
   - ./gradlew cobertura coveralls
