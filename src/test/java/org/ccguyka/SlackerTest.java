@@ -28,4 +28,40 @@ public class SlackerTest {
         verify(postRequestedFor(urlEqualTo("/webhook"))
                 .withRequestBody(new ContainsPattern("message")));
     }
+
+    @Test
+    public void verifyMessageIsSentInMainMethod() throws Exception {
+        stubFor(post(urlEqualTo("/webhook"))
+                .willReturn(aResponse()
+                        .withBody("ok!")));
+
+        Slacker.main(new String[]{"-hk", "http://localhost:9999/webhook", "-m", "message"});
+
+        verify(postRequestedFor(urlEqualTo("/webhook"))
+                .withRequestBody(new ContainsPattern("message")));
+    }
+
+    @Test
+    public void verifyMessageIsNotSentIfMandatoryParameterIsMissing() throws Exception {
+        stubFor(post(urlEqualTo("/webhook"))
+                .willReturn(aResponse()
+                        .withBody("ok!")));
+
+        Slacker.main(new String[0]);
+
+        verify(0, postRequestedFor(urlEqualTo("/webhook"))
+                .withRequestBody(new ContainsPattern("message")));
+    }
+
+    @Test
+    public void verifyMessageIsNotSentIfHelpParemeterIsSpecified() throws Exception {
+        stubFor(post(urlEqualTo("/webhook"))
+                .willReturn(aResponse()
+                        .withBody("ok!")));
+
+        Slacker.main(new String[]{"-hk", "http://localhost:9999/webhook", "-m", "message", "-h"});
+
+        verify(0, postRequestedFor(urlEqualTo("/webhook"))
+                .withRequestBody(new ContainsPattern("message")));
+    }
 }
