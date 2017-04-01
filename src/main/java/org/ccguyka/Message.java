@@ -3,14 +3,20 @@ package org.ccguyka;
 
 public class Message {
 
+    private final String destination;
     private final String messageText;
     private String color;
     private String author;
     private String title;
     private String titleLink;
 
-    public Message(String messageText) {
+    public Message(String destination, String messageText) {
+        this.destination = destination;
         this.messageText = messageText;
+    }
+
+    public String getDestination() {
+        return destination;
     }
 
     public String getMessageText() {

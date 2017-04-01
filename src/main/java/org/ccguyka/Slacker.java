@@ -44,16 +44,16 @@ public class Slacker {
             return;
         }
 
-        String hook = cmd.getOptionValue("hook");
         Message message = createMessage(cmd);
 
-        SlackApi api = new SlackApi(hook);
+        SlackApi api = new SlackApi(message.getDestination());
         api.call(createSlackMessageFor(message));
     }
 
     private Message createMessage(CommandLine cmd) {
         String messageText = cmd.getOptionValue("message");
-        Message message = new Message(messageText);
+        String destination = cmd.getOptionValue("hook");
+        Message message = new Message(destination, messageText);
         message.setColor(cmd.getOptionValue("color", "warning"));
         message.setAuthor(cmd.getOptionValue("author", null));
         message.setTitle(cmd.getOptionValue("title", null));

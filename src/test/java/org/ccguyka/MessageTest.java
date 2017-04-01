@@ -9,8 +9,9 @@ public class MessageTest {
 
     @Test
     public void verifyMessage() {
-        Message message = new Message("message");
+        Message message = new Message("destination", "message");
 
+        assertThat(message.getDestination()).isEqualTo("destination");
         assertThat(message.getMessageText()).isEqualTo("message");
     }
 }
