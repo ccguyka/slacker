@@ -94,7 +94,7 @@ jacocoTestReport {
 }
 
 // Define the main class for the application
-mainClassName = 'Slacker'
+mainClassName = 'SlackerCli'
 
 task wrapper(type: Wrapper) {
     gradleVersion = '3.4.1' //version required
