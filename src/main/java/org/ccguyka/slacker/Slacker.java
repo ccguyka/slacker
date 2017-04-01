@@ -13,17 +13,6 @@ class Slacker {
         this.message = message;
     }
 
-    public static void main(String[] args) throws Exception {
-        MessageCreator messageCreator = new MessageCreator();
-        Message message = messageCreator.from(args);
-        if (message == null) {
-            messageCreator.printHelp();
-            return;
-        }
-        Slacker slacker = new Slacker(message);
-        slacker.send();
-    }
-
     public void send() {
         SlackApi api = new SlackApi(message.getDestination());
         api.call(createSlackMessageFor(message));
