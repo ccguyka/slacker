@@ -85,6 +85,13 @@ sonarqube {
     }
 }
 
+jacocoTestReport {
+    reports {
+        xml.enabled = true // coveralls plugin depends on xml format report
+        html.enabled = true
+    }
+}
+
 // Define the main class for the application
 mainClassName = 'Slacker'
 
