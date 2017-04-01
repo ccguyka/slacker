@@ -10,5 +10,12 @@ It is a command line application that currently only supports simple messages.
 ## Usage
 
 ```bash
-java -jar slacker.jar -h <slack-webhook> -m <text-message>
+java -jar slacker.jar
+ -a,--author <arg>       Author of the message
+ -c,--color <arg>        Color of the message, default: 'warning'
+ -h,--help               print this message
+ -hk,--hook <arg>        Slack to hook
+ -m,--message <arg>      Message to be sent
+ -t,--title <arg>        Title of the message
+ -tl,--titlelink <arg>   The link where title should refer to
 ```

@@ -1,6 +1,7 @@
 package org.ccguyka;
 
 import net.gpedro.integrations.slack.SlackApi;
+import net.gpedro.integrations.slack.SlackAttachment;
 import net.gpedro.integrations.slack.SlackMessage;
 import org.apache.commons.cli.*;
 
@@ -14,8 +15,13 @@ public class Slacker {
     public Slacker() {
         options = new Options();
 
-        options.addRequiredOption("h", "hook", true, "Slack to hook");
+        options.addRequiredOption("hk", "hook", true, "Slack to hook");
         options.addRequiredOption("m", "message", true, "Message to be sent");
+        options.addOption("a", "author", true, "Author of the message");
+        options.addOption("c", "color", true, "Color of the message, default: 'warning'");
+        options.addOption("t", "title", true, "Title of the message");
+        options.addOption("tl", "titlelink", true, "The link where title should refer to");
+        options.addOption("h", "help", false, "print this message");
     }
 
     public static void main(String[] args) throws Exception {
@@ -25,12 +31,41 @@ public class Slacker {
 
     private void send(String[] args) throws ParseException {
         CommandLineParser parser = new DefaultParser();
-        CommandLine cmd = parser.parse( options, args);
+        CommandLine cmd;
+        try {
+            cmd = parser.parse(options, args);
+        } catch( ParseException exp ) {
+            printHelp();
+
+            return;
+        }
+
+        if (cmd.hasOption("help")) {
+            // automatically generate the help statement
+            printHelp();
+            return;
+        }
 
         String hook = cmd.getOptionValue("hook");
         String message = cmd.getOptionValue("message");
 
         SlackApi api = new SlackApi(hook);
-        api.call(new SlackMessage(message));
+        SlackMessage slackMessage = new SlackMessage("");
+        SlackAttachment attachment = new SlackAttachment();
+        attachment.setFallback(message);
+        attachment.setColor(cmd.getOptionValue("color", "warning"));
+        attachment.setText(message);
+        attachment.setAuthorName(cmd.getOptionValue("author", null));
+        attachment.addMarkdownAttribute("text");
+        attachment.setTitle(cmd.getOptionValue("title", null));
+        attachment.setTitleLink(cmd.getOptionValue("titlelink", null));
+        slackMessage.addAttachments(attachment);
+        api.call(slackMessage);
+    }
+
+    private void printHelp() {
+        // automatically generate the help statement
+        HelpFormatter formatter = new HelpFormatter();
+        formatter.printHelp( "java -jar slacker.jar", options );
     }
 }
