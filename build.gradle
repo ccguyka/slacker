@@ -12,6 +12,9 @@ apply plugin: 'java'
 // Apply the application plugin to add support for building an application
 apply plugin: 'application'
 
+apply plugin: 'jacoco'
+apply plugin: 'coveralls'
+
 sourceCompatibility = 1.8
 
 // In this section you declare where to find the dependencies of your project
@@ -28,6 +31,20 @@ dependencies {
 
     // Use JUnit test framework
     testCompile 'junit:junit:4.12'
+}
+
+buildscript {
+    repositories { jcenter() }
+    dependencies {
+        classpath 'org.kt3k.gradle.plugin:coveralls-gradle-plugin:0.2.5'
+    }
+}
+
+jacocoTestReport {
+    reports {
+        xml.enabled = true
+        html.enabled = true
+    }
 }
 
 // Define the main class for the application
