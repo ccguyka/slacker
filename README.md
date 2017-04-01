@@ -1,5 +1,9 @@
 # slacker
 
+[![Build Status](https://travis-ci.org/ccguyka/slacker.svg?branch=master)](https://travis-ci.org/ccguyka/slacker)
+[![Coverage Status](https://coveralls.io/repos/github/ccguyka/slacker/badge.svg?branch=master)](https://coveralls.io/github/ccguyka/slacker?branch=master)
+[![Dependency Status](https://www.versioneye.com/user/projects/58df730726a5bb0052202fd1/badge.svg?style=flat-square)](https://www.versioneye.com/user/projects/58df730726a5bb0052202fd1)
+
 slacker is a tool for simple slack API access via webhooks.
 It is a command line application that currently only supports simple messages.
 
