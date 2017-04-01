@@ -28,7 +28,7 @@ Slack [formatting](https://api.slack.com/docs/message-formatting) is supported f
 
 - Basic text formatting
 
-  <code>&grave;&grave;&grave;pre&grave;&grave;&grave;</code>, <code>&grave;code&grave;</code>, <code>&lowbar;italic&lowbar;</code>, <code>&ast;bold&ast;</code>, <code>~strike~</code>
+  <code>&grave;&grave;&grave;pre&grave;&grave;&grave;</code>, <code>&grave;code&grave;</code>, <code>&lowbar;italic&lowbar;</code>, <code>&ast;bold&ast;</code>, <code>&tilde;strike&tilde;</code>
 
 - Links
 
