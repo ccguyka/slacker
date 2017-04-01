@@ -19,3 +19,17 @@ java -jar slacker.jar
  -t,--title <arg>        Title of the message
  -tl,--titlelink <arg>   The link where title should refer to
 ```
+
+## Message
+
+Slack [formatting](https://api.slack.com/docs/message-formatting) is supported for the message text (but not for the title).
+
+### Examples
+
+- Basic text formatting
+
+  <code>&grave;&grave;&grave;pre&grave;&grave;&grave;</code>, <code>&grave;code&grave;</code>, <code>&lowbar;italic&lowbar;</code>, <code>&ast;bold&ast;</code>, <code>~strike~</code>
+
+- Links
+
+  `<http://www.foo.com|text>`
