@@ -93,6 +93,17 @@ jacocoTestReport {
     }
 }
 
+task fatJar(type: Jar) {
+    manifest {
+        attributes 'Implementation-Title': 'Gradle Jar File Example',
+                'Implementation-Version': version,
+                'Main-Class': 'org.ccguyka.slacker.SlackerCli'
+    }
+    baseName = project.name + '-all'
+    from { configurations.compile.collect { it.isDirectory() ? it : zipTree(it) } }
+    with jar
+}
+
 // Define the main class for the application
 mainClassName = 'SlackerCli'
 
