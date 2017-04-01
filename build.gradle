@@ -23,7 +23,6 @@ repositories {
 
 dependencies {
     // This dependency is found on compile classpath of this component and consumers.
-    compile 'com.google.guava:guava:20.0'
     compile group: 'net.gpedro.integrations.slack', name: 'slack-webhook', version: '1.2.1'
     compile group: 'commons-cli', name: 'commons-cli', version: '1.4'
 
