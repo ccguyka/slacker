@@ -46,6 +46,7 @@ dependencies {
     testCompile 'junit:junit:4.12'
     testCompile 'org.assertj:assertj-core:3.6.2'
     testCompile 'nl.jqno.equalsverifier:equalsverifier:2.2.1'
+    testCompile "com.github.tomakehurst:wiremock:2.5.1"
 }
 
 cobertura.coverageFormats = ['html', 'xml']

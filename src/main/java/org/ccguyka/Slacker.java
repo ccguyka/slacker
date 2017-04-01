@@ -3,7 +3,6 @@ package org.ccguyka;
 import net.gpedro.integrations.slack.SlackApi;
 import net.gpedro.integrations.slack.SlackAttachment;
 import net.gpedro.integrations.slack.SlackMessage;
-import org.apache.commons.cli.*;
 
 
 public class Slacker {
@@ -25,7 +24,7 @@ public class Slacker {
         slacker.send();
     }
 
-    private void send() throws ParseException {
+    public void send() {
         SlackApi api = new SlackApi(message.getDestination());
         api.call(createSlackMessageFor(message));
     }
